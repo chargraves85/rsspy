@@ -1,0 +1,36 @@
+version: "3.2"
+services:
+
+  backend:
+    restart: always
+    container_name: code
+    env_file:
+      - ./rsspy-backend/.env
+
+    ## TODO: this isn't recommended in prod, this should be served by a proxy like nginx
+    command : bash -c "python3 manage.py makemigrations && 
+                      python3 manage.py migrate &&
+                      python3 manage.py runserver 0.0.0.0:8000"
+    build:
+      context: ./rsspy-backend/
+      dockerfile: Dockerfile
+
+  frontend:
+    restart: always
+    container_name: frontend
+    build:
+      context: ./rsspy-frontend/
+      dockerfile: Dockerfile
+    ports:
+      - 3500:80
+
+  rsspy:
+    restart: always
+    container_name: frontend
+    build:
+      context: ./rsspy-frontend/
+      dockerfile: Dockerfile
+    ports:
+      - 3500:80
+    depends_on:
+      - backend

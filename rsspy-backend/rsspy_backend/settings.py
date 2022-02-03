@@ -24,15 +24,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ["DJANGO_SECRET"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'frontend',
+    'localhost', 
+    '127.0.0.1',
+    'frontend.rsspy_default'
+
+    ]
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    
     'rsspy_backend',
     'django_extensions',
     'graphene_django',
@@ -48,10 +54,10 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -131,11 +137,26 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000',
-    'http://localhost:3500'
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3500',
+    'http://frontend:3500',
+    'http://127.0.0.1:3500'
 ]
+
+# CSRF_TRUSTED_ORIGINS = [
+#     'http://localhost:3500',
+#     'http://frontend:3500',
+#     'http://127.0.0.1:3500'
+# ]
 
 GRAPHENE = {
     'SCHEMA': 'rsspy_backend.schema.schema'
 }
+
+
+###############################################
+############### MONKEY PATCH ##################
+###############################################
+import django
+from django.utils.encoding import force_str
+django.utils.encoding.force_text = force_str
