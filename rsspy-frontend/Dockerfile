@@ -15,4 +15,4 @@ RUN rm -rf ./*
 # Copy static assets from builder stage
 COPY --from=builder /app/public .
 # Containers run nginx with global directives and daemon off
-CMD sh -c "nginx -g 'daemon off;'"
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
