@@ -84,7 +84,7 @@ export async function getLineChartData() {
 
         });
 
-        return data
+        return data  // TODO: Return error if data is empty
     })
 
     return chartData;

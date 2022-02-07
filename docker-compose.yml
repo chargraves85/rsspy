@@ -3,14 +3,16 @@ services:
 
   backend:
     restart: always
-    container_name: code
+    container_name: backend
     env_file:
       - ./rsspy-backend/.env
 
     ## TODO: this isn't recommended in prod, this should be served by a proxy like nginx
-    command : bash -c "python3 manage.py makemigrations && 
-                      python3 manage.py migrate &&
-                      python3 manage.py runserver 0.0.0.0:8000"
+    ## TODO: make sqlite3 db mount to host to presist data
+    command : bash -c "python3 manage.py makemigrations ;
+                      python3 manage.py migrate ;
+                      python3 manage.py runscript coin_updater ;
+                      python3 manage.py runserver 0.0.0.0:8000" 
     build:
       context: ./rsspy-backend/
       dockerfile: Dockerfile
@@ -18,19 +20,21 @@ services:
   frontend:
     restart: always
     container_name: frontend
+    command: sh -c 'gatsby serve -H frontend -p 3500'
     build:
       context: ./rsspy-frontend/
       dockerfile: Dockerfile
-    ports:
-      - 3500:80
+    depends_on:
+      - backend
 
   rsspy:
     restart: always
-    container_name: frontend
+    container_name: proxy
     build:
-      context: ./rsspy-frontend/
+      context: ./nginx/
       dockerfile: Dockerfile
     ports:
-      - 3500:80
+      - 80:80
     depends_on:
       - backend
+      - frontend

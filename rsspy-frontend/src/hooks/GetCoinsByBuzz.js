@@ -12,6 +12,9 @@ export async function GetCoinsByBuzz() {
             }
 }`
         });
+        console.log('******************************************************************')
+        console.log(res)
+        console.log('******************************************************************')
         return res;
     } catch (err) {
         console.log(err);

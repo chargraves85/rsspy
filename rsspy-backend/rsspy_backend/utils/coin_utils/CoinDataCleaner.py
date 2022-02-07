@@ -4,7 +4,7 @@ import copy
 
 class CoinDataCleaner:
 
-    def __init__(self, coins, timestamp, delta):
+    def __init__(self, coins, timestamp, delta):  # TODO: delta should be an env var
         self.coins = coins
         self.timestamp = timestamp
         self.delta = delta

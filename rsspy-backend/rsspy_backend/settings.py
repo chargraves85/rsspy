@@ -30,8 +30,10 @@ ALLOWED_HOSTS = [
     'frontend',
     'localhost', 
     '127.0.0.1',
-    'frontend.rsspy_default'
-
+    'frontend.rsspy_default',
+    'proxy',
+    'proxy.rsspy_default',
+    'backend'
     ]
 
 
@@ -140,18 +142,28 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3500',
     'http://frontend:3500',
-    'http://127.0.0.1:3500'
+    'http://127.0.0.1:3500',
+    'http://proxy',
+    'http://proxy.rsspy_default',
+    'http://backend',
+    'http://backend:8000'
 ]
 
-# CSRF_TRUSTED_ORIGINS = [
-#     'http://localhost:3500',
-#     'http://frontend:3500',
-#     'http://127.0.0.1:3500'
-# ]
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:3500',
+    'http://frontend:3500',
+    'http://127.0.0.1:3500',
+    'http://proxy',
+    'http://proxy.rsspy_default'
+]
 
 GRAPHENE = {
     'SCHEMA': 'rsspy_backend.schema.schema'
 }
+
+CRONJOBS = [
+    ('0 * * * *', 'rsspy_backend.scripts.coin_updater')
+]
 
 
 ###############################################
