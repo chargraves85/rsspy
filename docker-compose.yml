@@ -11,6 +11,7 @@ services:
     ## TODO: make sqlite3 db mount to host to presist data
     command : bash -c "python3 manage.py makemigrations ;
                       python3 manage.py migrate ;
+                      python manage.py crontab add;
                       python3 manage.py runscript coin_updater ;
                       python3 manage.py runserver 0.0.0.0:8000" 
     build:
