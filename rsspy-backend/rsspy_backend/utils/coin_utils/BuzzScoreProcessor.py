@@ -18,10 +18,10 @@ class BuzzScoreProcessor:
             data_prop_counter = list(coin.data.keys())
 
             if len(data_prop_counter) == 1:
-                control = Coin.objects.get(coinName='Bitcoin')
+                control = Coin.objects.get(coinName='Bitcoin')  # TODO: while this is sound, I'm not so sure this is a good practice
                 keys = list(control.data.keys())
                 for key in keys:
-                    if coin.data[key]:
+                    if key in coin.data:
                         coin.data[key].update({'buzzScore': 0, 'articleCount': 0})
                     else:
                         coin.data[key] = {'buzzScore': 0, 'articleCount': 0}

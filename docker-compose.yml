@@ -14,6 +14,9 @@ services:
                       python manage.py crontab add;
                       python3 manage.py runscript coin_updater ;
                       python3 manage.py runserver 0.0.0.0:8000" 
+    # ports:
+    #   - 8000:8000  expose this if you want access to backend
+    # If you want access to django admin run 'docker exec backend python3 /app/api/manage.py createsuperuser --username $USERNAME --password $PASSWORD'
     build:
       context: ./rsspy-backend/
       dockerfile: Dockerfile

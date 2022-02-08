@@ -32,7 +32,7 @@ def coin_updater():
     print("CoinGather --- %s seconds ---" % (time.time() - start_time))
 
     start_time = time.time()
-    print("Starting Getting Objects for DB")
+    print("Starting Getting Objects from DB")
     coins = list(models.Coin.objects.all())
     print("Get all objects --- %s seconds ---" % (time.time() - start_time))
 
