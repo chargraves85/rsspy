@@ -162,9 +162,10 @@ GRAPHENE = {
 }
 
 CRONJOBS = [
-    ('0 * * * *', 'rsspy_backend.scripts.coin_updater')
+    ('0 * * * *', 'rsspy_backend.scripts.coin_updater.coin_updater')
 ]
 
+CRONTAB_COMMAND_SUFFIX = '2>&1'
 
 ###############################################
 ############### MONKEY PATCH ##################
