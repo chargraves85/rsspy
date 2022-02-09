@@ -6,9 +6,9 @@ services:
     container_name: backend
     env_file:
       - ./rsspy-backend/.env
-
+    volumes:
+      - "C:/Users/Chris/rsspy-db:/app/api/database"
     ## TODO: this isn't recommended in prod, this should be served by a proxy like nginx
-    ## TODO: make sqlite3 db mount to host to presist data
     command : bash -c "/etc/init.d/cron start;
                       python3 manage.py makemigrations ;
                       python3 manage.py migrate ;

@@ -24,6 +24,23 @@ const IndexPage = ({ serverData }) => {
       <div style={{ width: '750px' }}>
         <Line data={serverData} />
       </div>
+      <br/>
+      <div>
+        <h3>Alpha Build 0.1</h3>
+        <ul style="list-style-type: circle;">
+        <li>Displays top 10 coins based on percentage buzz change between the last two runs.</li>
+        </ul>
+        <h4>Feature Roadmap</h4>
+        <ul style="list-style-type: circle;">
+        <li>Mouse hover data</li>
+        <li>Table data with clickable links to get coin history</li>
+        <li>Filters to manipulate chart</li>
+        <li>Email alerts</li>
+        <li>Sentiment analysis</li>
+        <li>NFT feature set</li>
+        </ul>
+      </div>
+      <p>&nbsp;</p>
     </Layout>
   )
 }
