@@ -1,5 +1,6 @@
 ## Quickstart
 - check compose file for changes specific to your environment, most importantly, the backend volume
+- copy rsspy-backend/env-template to rsspy-backend/.env and update accordingly
 - `docker-compose up rsspy`
 - Navigate to http://localhost (with port number as defined in compose file for rsspy service)
 
